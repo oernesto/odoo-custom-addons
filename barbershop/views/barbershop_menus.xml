@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_barbershop_chair_dashboard" model="ir.actions.client">
+        <field name="name">Chairs</field>
+        <field name="tag">barbershop_chair_dashboard</field>
+    </record>
+
+    <record id="action_barbershop_order_dashboard" model="ir.actions.client">
+        <field name="name">Statistics</field>
+        <field name="tag">barbershop_order_dashboard</field>
+    </record>
+
+    <menuitem id="menu_barbershop_root"
+              name="Barbershop"
+              sequence="100"
+              web_icon="barbershop,static/description/icon.png"
+              groups="barbershop.group_barbershop_user,barbershop.group_barbershop_barber"/>
+
+    <menuitem id="menu_barbershop_chair_dashboard"
+              name="Chairs"
+              parent="menu_barbershop_root"
+              action="action_barbershop_chair_dashboard"
+              sequence="5"/>
+
+    <menuitem id="menu_barbershop_order"
+              name="Orders"
+              parent="menu_barbershop_root"
+              action="action_barbershop_order"
+              groups="barbershop.group_barbershop_user"
+              sequence="10"/>
+
+    <menuitem id="menu_barbershop_order_dashboard"
+              name="Statistics"
+              parent="menu_barbershop_root"
+              action="action_barbershop_order_dashboard"
+              groups="barbershop.group_barbershop_user"
+              sequence="15"/>
+
+    <menuitem id="menu_barbershop_configuration"
+              name="Configuration"
+              parent="menu_barbershop_root"
+              sequence="90"
+              groups="barbershop.group_barbershop_manager"/>
+
+    <menuitem id="menu_barbershop_shop"
+              name="Barbershops"
+              parent="menu_barbershop_configuration"
+              action="action_barbershop_shop"
+              sequence="10"/>
+
+    <menuitem id="menu_barbershop_chair"
+              name="Chairs (List)"
+              parent="menu_barbershop_configuration"
+              action="action_barbershop_chair"
+              sequence="20"/>
+
+    <menuitem id="menu_barbershop_barber"
+              name="Barbers"
+              parent="menu_barbershop_configuration"
+              action="action_barbershop_barber"
+              sequence="30"/>
+
+    <menuitem id="menu_barbershop_service"
+              name="Services"
+              parent="menu_barbershop_configuration"
+              action="action_barbershop_service"
+              sequence="40"/>
+
+    <menuitem id="menu_barbershop_payment_method"
+              name="Payment Methods"
+              parent="menu_barbershop_configuration"
+              action="action_barbershop_payment_method"
+              sequence="50"/>
+
+    <menuitem id="menu_barbershop_settings"
+              name="Settings"
+              parent="menu_barbershop_configuration"
+              action="base_setup.action_general_configuration"
+              sequence="99"
+              groups="base.group_system"/>
+</odoo>

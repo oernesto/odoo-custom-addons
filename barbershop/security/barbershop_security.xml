@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_barbershop" model="ir.module.category">
+        <field name="name">Barbershop</field>
+        <field name="description">Helps you manage your barbershops.</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="res_groups_privilege_barbershop" model="res.groups.privilege">
+        <field name="name">Barbershop</field>
+        <field name="category_id" ref="module_category_barbershop"/>
+    </record>
+
+    <record id="group_barbershop_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="sequence">10</field>
+        <field name="privilege_id" ref="res_groups_privilege_barbershop"/>
+        <field name="comment">Can create and manage barbershop orders.</field>
+    </record>
+
+    <record id="group_barbershop_manager" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="sequence">20</field>
+        <field name="privilege_id" ref="res_groups_privilege_barbershop"/>
+        <field name="implied_ids" eval="[(4, ref('group_barbershop_user'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        <field name="comment">Can configure barbershops, chairs, barbers, services and payment methods.</field>
+    </record>
+
+    <!-- Barber: a separate, more restricted role. It is NOT implied by / does not imply
+         User or Administrator, so it gets its own independent toggle in the Users form
+         instead of sharing the User/Administrator radio-selection. -->
+    <record id="res_groups_privilege_barbershop_barber" model="res.groups.privilege">
+        <field name="name">Barber Access</field>
+        <field name="category_id" ref="module_category_barbershop"/>
+        <field name="sequence">5</field>
+    </record>
+
+    <record id="group_barbershop_barber" model="res.groups">
+        <field name="name">Barber</field>
+        <field name="privilege_id" ref="res_groups_privilege_barbershop_barber"/>
+        <field name="comment">Restricted access: can only see their own chair(s) and create/manage orders on them. No access to other barbershops, configuration, all-orders list or statistics.</field>
+    </record>
+
+    <!-- Multi-company record rules -->
+    <record id="barbershop_shop_company_rule" model="ir.rule">
+        <field name="name">Barbershop: multi-company</field>
+        <field name="model_id" ref="model_barbershop_shop"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="barbershop_service_company_rule" model="ir.rule">
+        <field name="name">Barbershop Service: multi-company</field>
+        <field name="model_id" ref="model_barbershop_service"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="barbershop_payment_method_company_rule" model="ir.rule">
+        <field name="name">Barbershop Payment Method: multi-company</field>
+        <field name="model_id" ref="model_barbershop_payment_method"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="barbershop_order_company_rule" model="ir.rule">
+        <field name="name">Barbershop Order: multi-company</field>
+        <field name="model_id" ref="model_barbershop_order"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <!-- Barber-only record rules: restrict every barbershop model to what the
+         logged-in barber actually needs to see, based on barbershop.barber.user_id. -->
+    <record id="barbershop_chair_barber_rule" model="ir.rule">
+        <field name="name">Barbershop Chair: barbers see only their own chair(s)</field>
+        <field name="model_id" ref="model_barbershop_chair"/>
+        <field name="domain_force">[('barber_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_barbershop_barber'))]"/>
+    </record>
+
+    <record id="barbershop_shop_barber_rule" model="ir.rule">
+        <field name="name">Barbershop Shop: barbers see only shops with their chair(s)</field>
+        <field name="model_id" ref="model_barbershop_shop"/>
+        <field name="domain_force">[('chair_ids.barber_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_barbershop_barber'))]"/>
+    </record>
+
+    <record id="barbershop_barber_barber_rule" model="ir.rule">
+        <field name="name">Barbershop Barber: barbers see only their own profile</field>
+        <field name="model_id" ref="model_barbershop_barber"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_barbershop_barber'))]"/>
+    </record>
+
+    <record id="barbershop_order_barber_rule" model="ir.rule">
+        <field name="name">Barbershop Order: barbers see/manage only their own orders</field>
+        <field name="model_id" ref="model_barbershop_order"/>
+        <field name="domain_force">['|', ('barber_id.user_id', '=', user.id), ('chair_id.barber_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_barbershop_barber'))]"/>
+    </record>
+
+    <record id="barbershop_order_line_barber_rule" model="ir.rule">
+        <field name="name">Barbershop Order Line: barbers see/manage only their own order lines</field>
+        <field name="model_id" ref="model_barbershop_order_line"/>
+        <field name="domain_force">['|', ('order_id.barber_id.user_id', '=', user.id), ('order_id.chair_id.barber_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_barbershop_barber'))]"/>
+    </record>
+</odoo>

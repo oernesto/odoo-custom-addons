@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.barbershop</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Barbershop" string="Barbershop" name="barbershop" groups="barbershop.group_barbershop_manager">
+                    <block title="Barbershop" id="barbershop_setting_container">
+                        <setting id="barbershop_enabled_setting"
+                                 string="Barbershop Management"
+                                 help="Enable the barbershop features for this company.">
+                            <field name="barbershop_enabled"/>
+                        </setting>
+                        <setting id="barbershop_shops_setting"
+                                 string="Barbershops"
+                                 help="Define your barbershop locations, their chairs and barbers.">
+                            <button name="%(barbershop.action_barbershop_shop)d" icon="oi-arrow-right"
+                                    type="action" string="Barbershops" class="btn-link"/>
+                            <button name="%(barbershop.action_barbershop_barber)d" icon="oi-arrow-right"
+                                    type="action" string="Barbers" class="btn-link"/>
+                            <button name="%(barbershop.action_barbershop_service)d" icon="oi-arrow-right"
+                                    type="action" string="Services" class="btn-link"/>
+                        </setting>
+                        <setting id="barbershop_payment_methods_setting"
+                                 string="Payment Methods"
+                                 help="Cash, bank transfer and card are available by default. Enable the ones you accept on each barbershop.">
+                            <button name="%(barbershop.action_barbershop_payment_method)d" icon="oi-arrow-right"
+                                    type="action" string="Payment Methods" class="btn-link"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Overrides the browser tab favicon for the whole instance with the
+         Barbershop barber pole. This is a global, instance-wide override (Odoo's
+         favicon is not scoped per-app): it only takes effect when no other
+         mechanism (e.g. a website's own favicon) has already set `x_icon`. -->
+    <template id="web_layout_favicon" inherit_id="web.layout" name="Barbershop Favicon">
+        <xpath expr="//link[@rel='shortcut icon']" position="replace">
+            <link type="image/png" rel="shortcut icon" t-att-href="x_icon or '/barbershop/static/img/favicon.png'"/>
+        </xpath>
+    </template>
+</odoo>

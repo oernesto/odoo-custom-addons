@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_barbershop_chair_tree" model="ir.ui.view">
+        <field name="name">barbershop.chair.tree</field>
+        <field name="model">barbershop.chair</field>
+        <field name="arch" type="xml">
+            <list string="Chairs">
+                <field name="shop_id"/>
+                <field name="name"/>
+                <field name="barber_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_barbershop_chair_form" model="ir.ui.view">
+        <field name="name">barbershop.chair.form</field>
+        <field name="model">barbershop.chair</field>
+        <field name="arch" type="xml">
+            <form string="Chair">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <field name="active" invisible="1"/>
+                    <group>
+                        <field name="shop_id"/>
+                        <field name="name"/>
+                        <field name="barber_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_barbershop_chair_kanban" model="ir.ui.view">
+        <field name="name">barbershop.chair.kanban</field>
+        <field name="model">barbershop.chair</field>
+        <field name="arch" type="xml">
+            <kanban action="action_open_kanban_order" type="object"
+                    quick_create="false" group_create="0" records_draggable="0"
+                    default_group_by="shop_id" class="o_barbershop_chair_kanban">
+                <field name="name"/>
+                <field name="barber_id"/>
+                <field name="active"/>
+                <field name="is_busy"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex align-items-center gap-2">
+                            <div t-attf-class="d-flex flex-column align-items-center justify-content-center text-center rounded shadow-sm p-2 {{!record.active.raw_value ? 'text-bg-secondary' : (record.is_busy.raw_value ? 'text-bg-warning' : 'text-bg-success')}}"
+                                style="width: 130px; height: 130px; cursor: pointer;">
+                                <i class="fa fa-cut fa-2x mb-2" title="Chair"/>
+                                <div class="fw-bold text-truncate w-100" title="Chair">
+                                    <field name="name"/>
+                                </div>
+                                <div class="small text-truncate w-100" t-if="record.barber_id.raw_value">
+                                    <field name="barber_id"/>
+                                </div>
+                            </div>
+                            <button type="object" name="action_create_order"
+                                    class="btn btn-primary d-flex align-items-center gap-1 text-nowrap"
+                                    title="New order on this chair">
+                                <i class="fa fa-plus"/> New Order
+                            </button>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_barbershop_chair_search" model="ir.ui.view">
+        <field name="name">barbershop.chair.search</field>
+        <field name="model">barbershop.chair</field>
+        <field name="arch" type="xml">
+            <search string="Search Chairs">
+                <field name="name"/>
+                <field name="shop_id"/>
+                <field name="barber_id"/>
+                <filter string="Busy" name="filter_busy" domain="[('is_busy', '=', True)]"/>
+                <filter string="Archived" name="filter_archived" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter string="Barbershop" name="groupby_shop" context="{'group_by': 'shop_id'}"/>
+                    <filter string="Barber" name="groupby_barber" context="{'group_by': 'barber_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_barbershop_chair" model="ir.actions.act_window">
+        <field name="name">Chairs</field>
+        <field name="res_model">barbershop.chair</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first chair
+            </p>
+        </field>
+    </record>
+</odoo>

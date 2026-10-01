@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_barbershop_order_tree" model="ir.ui.view">
+        <field name="name">barbershop.order.tree</field>
+        <field name="model">barbershop.order</field>
+        <field name="arch" type="xml">
+            <list string="Orders" decoration-success="state == 'paid'" decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="date_order"/>
+                <field name="shop_id"/>
+                <field name="chair_id"/>
+                <field name="barber_id"/>
+                <field name="partner_id"/>
+                <field name="payment_method_id"/>
+                <field name="amount_total" widget="monetary" sum="Total"/>
+                <field name="tip_amount" widget="monetary" optional="hide"/>
+                <field name="currency_id" column_invisible="True"/>
+                <field name="state" widget="badge" decoration-success="state == 'paid'" decoration-danger="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_barbershop_order_form" model="ir.ui.view">
+        <field name="name">barbershop.order.form</field>
+        <field name="model">barbershop.order</field>
+        <field name="arch" type="xml">
+            <form string="Barbershop Order">
+                <header>
+                    <button name="action_confirm_payment" type="object" string="Confirm Payment"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state == 'cancelled'"/>
+                    <button name="action_set_draft" type="object" string="Reset to Draft"
+                            invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,paid"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="shop_id"/>
+                            <field name="chair_id"/>
+                            <field name="barber_id"/>
+                        </group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="date_order"/>
+                            <field name="payment_method_id" widget="radio" options="{'horizontal': true}" readonly="state == 'paid'"/>
+                            <field name="available_payment_method_ids" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Order Lines" name="order_lines">
+                            <field name="line_ids" readonly="state != 'draft'">
+                                <list string="Order Lines" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="line_type"/>
+                                    <field name="service_id" invisible="line_type != 'service'"
+                                           required="line_type == 'service'"/>
+                                    <field name="product_id" invisible="line_type != 'product'"
+                                           required="line_type == 'product'"/>
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <field name="price_unit"/>
+                                    <field name="price_subtotal" widget="monetary" sum="Total"/>
+                                    <field name="currency_id" column_invisible="True"/>
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="amount_total" widget="monetary"/>
+                            </group>
+                            <group class="oe_right">
+                                <field name="tip_amount" widget="monetary" readonly="state != 'draft'"/>
+                            </group>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_barbershop_order_search" model="ir.ui.view">
+        <field name="name">barbershop.order.search</field>
+        <field name="model">barbershop.order</field>
+        <field name="arch" type="xml">
+            <search string="Search Orders">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="shop_id"/>
+                <field name="barber_id"/>
+                <field name="chair_id"/>
+                <filter string="Draft" name="filter_draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Paid" name="filter_paid" domain="[('state', '=', 'paid')]"/>
+                <filter string="Cancelled" name="filter_cancelled" domain="[('state', '=', 'cancelled')]"/>
+                <separator/>
+                <filter string="Today" name="filter_today"
+                        domain="[('date_order', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00'))]"/>
+                <group>
+                    <filter string="Barbershop" name="groupby_shop" context="{'group_by': 'shop_id'}"/>
+                    <filter string="Chair" name="groupby_chair" context="{'group_by': 'chair_id'}"/>
+                    <filter string="Barber" name="groupby_barber" context="{'group_by': 'barber_id'}"/>
+                    <filter string="Customer" name="groupby_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Status" name="groupby_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_barbershop_order_pivot" model="ir.ui.view">
+        <field name="name">barbershop.order.pivot</field>
+        <field name="model">barbershop.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Orders Analysis">
+                <field name="chair_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="amount_total" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_barbershop_order_graph" model="ir.ui.view">
+        <field name="name">barbershop.order.graph</field>
+        <field name="model">barbershop.order</field>
+        <field name="arch" type="xml">
+            <graph string="Orders Analysis" type="bar">
+                <field name="chair_id" type="row"/>
+                <field name="amount_total" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_barbershop_order" model="ir.actions.act_window">
+        <field name="name">Orders</field>
+        <field name="res_model">barbershop.order</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+        <field name="context">{'search_default_filter_today': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first order
+            </p>
+            <p>
+                An order associates a customer, a chair, a barber and one or more
+                service or product lines.
+            </p>
+        </field>
+    </record>
+</odoo>

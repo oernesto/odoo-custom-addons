@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- Demo customers -->
+    <record id="demo_customer_1" model="res.partner">
+        <field name="name">Carlos Diaz</field>
+        <field name="phone">+1 555-0101</field>
+        <field name="email">carlos.diaz@example.com</field>
+    </record>
+
+    <record id="demo_customer_2" model="res.partner">
+        <field name="name">Peter Brown</field>
+        <field name="phone">+1 555-0102</field>
+        <field name="email">peter.brown@example.com</field>
+    </record>
+
+    <!-- Demo barbers -->
+    <record id="demo_barber_john" model="barbershop.barber">
+        <field name="name">John Smith</field>
+        <field name="phone">+1 555-0201</field>
+        <field name="email">john.smith@example.com</field>
+    </record>
+
+    <record id="demo_barber_mike" model="barbershop.barber">
+        <field name="name">Mike Johnson</field>
+        <field name="phone">+1 555-0202</field>
+        <field name="email">mike.johnson@example.com</field>
+    </record>
+
+    <!-- Demo barbershop -->
+    <record id="demo_shop_downtown" model="barbershop.shop">
+        <field name="name">Downtown Barbershop</field>
+        <field name="street">221 Main Street</field>
+        <field name="city">New York</field>
+        <field name="phone">+1 555-0100</field>
+        <field name="email">downtown@barbershop.example.com</field>
+        <field name="payment_method_ids" eval="[(6, 0, [
+            ref('barbershop.payment_method_cash'),
+            ref('barbershop.payment_method_transfer'),
+            ref('barbershop.payment_method_card'),
+        ])]"/>
+    </record>
+
+    <record id="demo_barber_john" model="barbershop.barber">
+        <field name="shop_ids" eval="[(4, ref('demo_shop_downtown'))]"/>
+    </record>
+
+    <record id="demo_barber_mike" model="barbershop.barber">
+        <field name="shop_ids" eval="[(4, ref('demo_shop_downtown'))]"/>
+    </record>
+
+    <!-- Demo chairs -->
+    <record id="demo_chair_1" model="barbershop.chair">
+        <field name="name">Chair 1</field>
+        <field name="shop_id" ref="demo_shop_downtown"/>
+        <field name="barber_id" ref="demo_barber_john"/>
+    </record>
+
+    <record id="demo_chair_2" model="barbershop.chair">
+        <field name="name">Chair 2</field>
+        <field name="shop_id" ref="demo_shop_downtown"/>
+        <field name="barber_id" ref="demo_barber_mike"/>
+    </record>
+
+    <record id="demo_chair_3" model="barbershop.chair">
+        <field name="name">Chair 3</field>
+        <field name="shop_id" ref="demo_shop_downtown"/>
+    </record>
+
+    <!-- Demo services -->
+    <record id="demo_service_classic_haircut" model="barbershop.service">
+        <field name="name">Classic Haircut</field>
+        <field name="price">25.0</field>
+        <field name="duration">30</field>
+    </record>
+
+    <record id="demo_service_haircut_beard" model="barbershop.service">
+        <field name="name">Haircut &amp; Beard</field>
+        <field name="price">35.0</field>
+        <field name="duration">45</field>
+    </record>
+
+    <record id="demo_service_shave" model="barbershop.service">
+        <field name="name">Shave</field>
+        <field name="price">20.0</field>
+        <field name="duration">20</field>
+    </record>
+
+    <record id="demo_service_hair_coloring" model="barbershop.service">
+        <field name="name">Hair Coloring</field>
+        <field name="price">60.0</field>
+        <field name="duration">60</field>
+    </record>
+
+    <record id="demo_service_kids_haircut" model="barbershop.service">
+        <field name="name">Kids Haircut</field>
+        <field name="price">18.0</field>
+        <field name="duration">20</field>
+    </record>
+
+    <!-- Demo retail products sold by the barbershop -->
+    <record id="demo_product_hair_wax" model="product.product">
+        <field name="name">Hair Wax</field>
+        <field name="type">consu</field>
+        <field name="sale_ok">1</field>
+        <field name="list_price">12.0</field>
+    </record>
+
+    <record id="demo_product_beard_oil" model="product.product">
+        <field name="name">Beard Oil</field>
+        <field name="type">consu</field>
+        <field name="sale_ok">1</field>
+        <field name="list_price">15.0</field>
+    </record>
+
+    <!-- Demo order -->
+    <record id="demo_order_1" model="barbershop.order">
+        <field name="shop_id" ref="demo_shop_downtown"/>
+        <field name="chair_id" ref="demo_chair_1"/>
+        <field name="barber_id" ref="demo_barber_john"/>
+        <field name="partner_id" ref="demo_customer_1"/>
+        <field name="payment_method_id" ref="barbershop.payment_method_cash"/>
+        <field name="state">paid</field>
+    </record>
+
+    <record id="demo_order_1_line_1" model="barbershop.order.line">
+        <field name="order_id" ref="demo_order_1"/>
+        <field name="line_type">service</field>
+        <field name="service_id" ref="demo_service_haircut_beard"/>
+        <field name="name">Haircut &amp; Beard</field>
+        <field name="quantity">1</field>
+        <field name="price_unit">35.0</field>
+    </record>
+
+    <record id="demo_order_1_line_2" model="barbershop.order.line">
+        <field name="order_id" ref="demo_order_1"/>
+        <field name="line_type">product</field>
+        <field name="product_id" ref="demo_product_beard_oil"/>
+        <field name="name">Beard Oil</field>
+        <field name="quantity">1</field>
+        <field name="price_unit">15.0</field>
+    </record>
+
+    <record id="demo_order_2" model="barbershop.order">
+        <field name="shop_id" ref="demo_shop_downtown"/>
+        <field name="chair_id" ref="demo_chair_2"/>
+        <field name="barber_id" ref="demo_barber_mike"/>
+        <field name="partner_id" ref="demo_customer_2"/>
+        <field name="state">draft</field>
+    </record>
+
+    <record id="demo_order_2_line_1" model="barbershop.order.line">
+        <field name="order_id" ref="demo_order_2"/>
+        <field name="line_type">service</field>
+        <field name="service_id" ref="demo_service_classic_haircut"/>
+        <field name="name">Classic Haircut</field>
+        <field name="quantity">1</field>
+        <field name="price_unit">25.0</field>
+    </record>
+
+</odoo>

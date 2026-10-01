@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_barbershop_service_tree" model="ir.ui.view">
+        <field name="name">barbershop.service.tree</field>
+        <field name="model">barbershop.service</field>
+        <field name="arch" type="xml">
+            <list string="Services" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="duration" string="Duration (min)"/>
+                <field name="price" widget="monetary"/>
+                <field name="currency_id" column_invisible="True"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_barbershop_service_form" model="ir.ui.view">
+        <field name="name">barbershop.service.form</field>
+        <field name="model">barbershop.service</field>
+        <field name="arch" type="xml">
+            <form string="Service">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Classic Haircut"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="price" widget="monetary"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="duration"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1" placeholder="Details about this service..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_barbershop_service" model="ir.actions.act_window">
+        <field name="name">Services</field>
+        <field name="res_model">barbershop.service</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first service
+            </p>
+        </field>
+    </record>
+</odoo>
