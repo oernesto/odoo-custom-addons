@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="petstyle_bath_order_view_list" model="ir.ui.view">
+        <field name="name">petstyle.bath.order.list</field>
+        <field name="model">petstyle.bath.order</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="date"/>
+                <field name="time" widget="float_time"/>
+                <field name="pet_id"/>
+                <field name="owner_name"/>
+                <field name="payment_method"/>
+                <field name="price"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="petstyle_bath_order_view_form" model="ir.ui.view">
+        <field name="name">petstyle.bath.order.form</field>
+        <field name="model">petstyle.bath.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_pay" string="Mark as Paid" type="object" class="btn-primary" invisible="state == 'paid'"/>
+                    <button name="action_pending" string="Back to Pending" type="object" invisible="state == 'pending'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,paid"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="time" widget="float_time"/>
+                            <field name="payment_method"/>
+                            <field name="price"/>
+                        </group>
+                        <group string="Pet">
+                            <field name="pet_id"/>
+                            <field name="pet_name"/>
+                            <field name="owner_name"/>
+                            <field name="size"/>
+                            <field name="race"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="email" widget="email"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="petstyle_bath_order_view_calendar" model="ir.ui.view">
+        <field name="name">petstyle.bath.order.calendar</field>
+        <field name="model">petstyle.bath.order</field>
+        <field name="arch" type="xml">
+            <calendar date_start="start_datetime" date_stop="stop_datetime"
+                      string="Bath Orders" mode="day" quick_create="0" color="state">
+                <field name="pet_id"/>
+                <field name="owner_name"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="petstyle_bath_order_view_search" model="ir.ui.view">
+        <field name="name">petstyle.bath.order.search</field>
+        <field name="model">petstyle.bath.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="pet_id"/>
+                <field name="owner_name"/>
+                <field name="date"/>
+                <filter string="Today" name="filter_today"
+                        domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="From Today" name="filter_from_today"
+                        domain="[('date', '>=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Date" name="filter_date" date="date"/>
+                <separator/>
+                <filter string="Pending" name="filter_pending" domain="[('state', '=', 'pending')]"/>
+                <filter string="Paid" name="filter_paid" domain="[('state', '=', 'paid')]"/>
+                <group>
+                    <filter string="Date" name="group_date" context="{'group_by': 'date:day'}"/>
+                    <filter string="State" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="petstyle_bath_order_action" model="ir.actions.act_window">
+        <field name="name">Bath Orders</field>
+        <field name="res_model">petstyle.bath.order</field>
+        <field name="view_mode">list,calendar,form</field>
+        <field name="search_view_id" ref="petstyle_bath_order_view_search"/>
+        <field name="context">{'search_default_filter_from_today': 1}</field>
+    </record>
+</odoo>

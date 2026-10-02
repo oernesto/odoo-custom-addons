@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_petstyle_pet_user,petstyle.pet.user,model_petstyle_pet,group_petstyle_user,1,1,1,0
+access_petstyle_pet_manager,petstyle.pet.manager,model_petstyle_pet,group_petstyle_manager,1,1,1,1
+access_petstyle_bath_order_user,petstyle.bath.order.user,model_petstyle_bath_order,group_petstyle_user,1,1,1,1
+access_petstyle_bath_order_manager,petstyle.bath.order.manager,model_petstyle_bath_order,group_petstyle_manager,1,1,1,1

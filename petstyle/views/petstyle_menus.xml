@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="petstyle_menu_root" name="PetStyle" sequence="100" groups="group_petstyle_user"/>
+    <menuitem id="petstyle_menu_bath_orders" name="Bath Orders" parent="petstyle_menu_root" action="petstyle_bath_order_action" sequence="10"/>
+    <menuitem id="petstyle_menu_pets" name="Pets" parent="petstyle_menu_root" action="petstyle_pet_action" sequence="20"/>
+</odoo>
