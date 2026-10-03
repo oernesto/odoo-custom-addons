@@ -20,3 +20,6 @@ access_barbershop_service_barber,barbershop.service.barber,model_barbershop_serv
 access_barbershop_payment_method_barber,barbershop.payment.method.barber,model_barbershop_payment_method,group_barbershop_barber,1,0,0,0
 access_barbershop_order_barber,barbershop.order.barber,model_barbershop_order,group_barbershop_barber,1,1,1,0
 access_barbershop_order_line_barber,barbershop.order.line.barber,model_barbershop_order_line,group_barbershop_barber,1,1,1,1
+access_barbershop_day_close_user,barbershop.day.close.user,model_barbershop_day_close,group_barbershop_user,1,1,1,1
+access_barbershop_day_close_line_user,barbershop.day.close.line.user,model_barbershop_day_close_line,group_barbershop_user,1,1,1,1
+access_res_partner_barbershop_barber,res.partner.barbershop.barber,base.model_res_partner,group_barbershop_barber,1,0,1,0

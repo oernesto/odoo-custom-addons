@@ -3,7 +3,7 @@ from datetime import datetime, time as dt_time, timedelta
 import pytz
 
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class PetstyleBathOrder(models.Model):
@@ -33,6 +33,11 @@ class PetstyleBathOrder(models.Model):
     stop_datetime = fields.Datetime(
         string="End", compute='_compute_datetimes', store=True)
 
+    whatsapp_state = fields.Selection(
+        [('not_sent', "Not Sent"), ('sent', "Sent"), ('error', "Error")],
+        string="WhatsApp", default='not_sent', required=True, copy=False)
+    whatsapp_error = fields.Text(string="WhatsApp Error", copy=False, readonly=True)
+
     @api.depends('date', 'time')
     def _compute_datetimes(self):
         tz = pytz.timezone(self.env.user.tz or 'UTC')
@@ -44,6 +49,48 @@ class PetstyleBathOrder(models.Model):
             start = tz.localize(naive).astimezone(pytz.utc).replace(tzinfo=None)
             order.start_datetime = start
             order.stop_datetime = start + timedelta(minutes=30)
+
+    def _send_whatsapp_reminder(self):
+        """Send the reminder for each order, recording the outcome.
+
+        Returns nothing; failures are stored on the order so that one bad
+        phone number does not block the others.
+        """
+        api_ = self.env['petstyle.whatsapp']
+        for order in self:
+            h, m = divmod(round(order.time * 60), 60)
+            params = [
+                order.owner_name or '',
+                order.pet_name or '',
+                order.date.strftime('%d/%m/%Y'),
+                '%02d:%02d' % (h, m),
+            ]
+            try:
+                api_._send_template(order.phone, params)
+            except UserError as e:
+                order.write({'whatsapp_state': 'error', 'whatsapp_error': str(e)})
+            else:
+                order.write({'whatsapp_state': 'sent', 'whatsapp_error': False})
+
+    def action_send_whatsapp(self):
+        self._send_whatsapp_reminder()
+        failed = self.filtered(lambda o: o.whatsapp_state == 'error')
+        if failed:
+            raise UserError(failed[0].whatsapp_error)
+
+    @api.model
+    def _cron_send_whatsapp_reminders(self):
+        icp = self.env['ir.config_parameter'].sudo()
+        if not icp.get_param('petstyle.whatsapp_enabled'):
+            return
+        lead = int(icp.get_param('petstyle.whatsapp_lead_minutes') or 60)
+        now = fields.Datetime.now()
+        orders = self.search([
+            ('whatsapp_state', '=', 'not_sent'),
+            ('start_datetime', '>', now),
+            ('start_datetime', '<=', now + timedelta(minutes=lead)),
+        ])
+        orders._send_whatsapp_reminder()
 
     def action_pay(self):
         self.state = 'paid'

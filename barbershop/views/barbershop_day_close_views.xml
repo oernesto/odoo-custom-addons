@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_barbershop_day_close_form" model="ir.ui.view">
+        <field name="name">barbershop.day.close.form</field>
+        <field name="model">barbershop.day.close</field>
+        <field name="arch" type="xml">
+            <form string="Day Closing">
+                <group>
+                    <group>
+                        <field name="date"/>
+                        <field name="shop_id"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                    </group>
+                    <group>
+                        <field name="order_count"/>
+                        <field name="barber_total" widget="monetary"/>
+                        <field name="shop_total" widget="monetary"/>
+                        <field name="tip_total" widget="monetary"/>
+                    </group>
+                </group>
+                <field name="line_ids" readonly="1">
+                    <list>
+                        <field name="barber_id"/>
+                        <field name="order_count"/>
+                        <field name="barber_amount" widget="monetary" sum="Total"/>
+                        <field name="shop_amount" widget="monetary" sum="Total"/>
+                        <field name="tip_amount" widget="monetary" sum="Total"/>
+                        <field name="currency_id" column_invisible="1"/>
+                    </list>
+                </field>
+                <footer>
+                    <button string="Close" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_barbershop_day_close" model="ir.actions.act_window">
+        <field name="name">Day Closing</field>
+        <field name="res_model">barbershop.day.close</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_barbershop_day_close"
+              name="Day Closing"
+              parent="menu_barbershop_root"
+              action="action_barbershop_day_close"
+              groups="barbershop.group_barbershop_user"
+              sequence="17"/>
+</odoo>

@@ -3,7 +3,7 @@
 
 {
     'name': 'Barbershop',
-    'version': '1.0',
+    'version': '1.1',
     'category': 'Services',
     'sequence': 100,
     'summary': 'Manage barbershops, chairs, barbers, services and orders',
@@ -44,6 +44,7 @@ Accounting, the payment method on an order is only informative.
         'views/barbershop_order_views.xml',
         'views/res_config_settings_views.xml',
         'views/barbershop_menus.xml',
+        'views/barbershop_day_close_views.xml',
         'views/webclient_templates.xml',
     ],
     'demo': [

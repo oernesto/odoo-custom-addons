@@ -15,6 +15,10 @@ class BarbershopService(models.Model):
     duration = fields.Float(
         string='Duration (minutes)', default=30.0,
         help='Estimated time needed to perform this service.')
+    shop_amount = fields.Monetary(
+        string='Barbershop Share', default=0.0,
+        help='Fixed amount of this service that goes to the barbershop on the day closing. '
+             'The remainder goes to the barber.')
     sequence = fields.Integer(default=10)
     company_id = fields.Many2one(
         'res.company', string='Company', default=lambda self: self.env.company)

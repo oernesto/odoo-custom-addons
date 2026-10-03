@@ -1161,6 +1161,7 @@ msgid "e.g. John Doe"
 msgstr "p. ej. Juan Pérez"
 
 #. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close_line__tip_amount
 #: model:ir.model.fields,field_description:barbershop.field_barbershop_order__tip_amount
 msgid "Tip"
 msgstr "Propina"
@@ -1169,3 +1170,62 @@ msgstr "Propina"
 #: model:ir.model.fields,help:barbershop.field_barbershop_order__tip_amount
 msgid "Tip left by the customer. It is informative only and is not included in the order total nor in any report totals."
 msgstr "Propina dejada por el cliente. Es solo informativa y no se incluye en el total de la orden ni en los totales de ningún reporte."
+
+#. module: barbershop
+#: model:ir.model,name:barbershop.model_barbershop_day_close
+msgid "Barbershop Day Closing"
+msgstr "Cierre del día de la barbería"
+
+#. module: barbershop
+#: model:ir.model,name:barbershop.model_barbershop_day_close_line
+msgid "Barbershop Day Closing Line"
+msgstr "Línea del cierre del día de la barbería"
+
+#. module: barbershop
+#: model:ir.actions.act_window,name:barbershop.action_barbershop_day_close
+#: model:ir.ui.menu,name:barbershop.menu_barbershop_day_close
+#: model_terms:ir.ui.view,arch_db:barbershop.view_barbershop_day_close_form
+msgid "Day Closing"
+msgstr "Cierre del día"
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close__date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close__line_ids
+msgid "Breakdown"
+msgstr "Desglose"
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close_line__barber_amount
+msgid "Barber Share"
+msgstr "Parte del barbero"
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close__shop_total
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close_line__shop_amount
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_service__shop_amount
+msgid "Barbershop Share"
+msgstr "Parte de la barbería"
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close__barber_total
+msgid "Barbers Share"
+msgstr "Parte de los barberos"
+
+#. module: barbershop
+#: model:ir.model.fields,help:barbershop.field_barbershop_service__shop_amount
+msgid "Fixed amount of this service that goes to the barbershop on the day closing. The remainder goes to the barber."
+msgstr "Monto fijo de este servicio que va a la barbería en el cierre del día. El resto va al barbero."
+
+#. module: barbershop
+#: model_terms:ir.ui.view,arch_db:barbershop.view_barbershop_day_close_form
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close__tip_total
+msgid "Tips"
+msgstr "Propinas"

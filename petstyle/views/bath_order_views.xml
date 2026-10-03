@@ -24,6 +24,8 @@
                 <header>
                     <button name="action_pay" string="Mark as Paid" type="object" class="btn-primary" invisible="state == 'paid'"/>
                     <button name="action_pending" string="Back to Pending" type="object" invisible="state == 'pending'"/>
+                    <button name="action_send_whatsapp" string="Send WhatsApp" type="object"
+                            invisible="whatsapp_state == 'sent'"/>
                     <field name="state" widget="statusbar" statusbar_visible="pending,paid"/>
                 </header>
                 <sheet>
@@ -33,6 +35,8 @@
                             <field name="time" widget="float_time"/>
                             <field name="payment_method"/>
                             <field name="price"/>
+                            <field name="whatsapp_state"/>
+                            <field name="whatsapp_error" invisible="not whatsapp_error"/>
                         </group>
                         <group string="Pet">
                             <field name="pet_id"/>

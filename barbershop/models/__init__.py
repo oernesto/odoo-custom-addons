@@ -10,3 +10,4 @@ from . import barbershop_shop
 from . import barbershop_chair
 from . import barbershop_order_line
 from . import barbershop_order
+from . import barbershop_day_close

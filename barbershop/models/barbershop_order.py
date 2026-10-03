@@ -26,7 +26,7 @@ class BarbershopOrder(models.Model):
         'barbershop.chair', string='Chair', tracking=True,
         domain="[('shop_id', '=', shop_id)]")
     barber_id = fields.Many2one(
-        'barbershop.barber', string='Barber', tracking=True,
+        'barbershop.barber', string='Barber', required=True, tracking=True,
         domain="[('shop_ids', '=', shop_id)]")
     partner_id = fields.Many2one(
         'res.partner', string='Customer', required=True, tracking=True)
@@ -88,6 +88,24 @@ class BarbershopOrder(models.Model):
             if vals.get('name', 'New') == 'New':
                 vals['name'] = self.env['ir.sequence'].next_by_code('barbershop.order') or 'New'
         return super().create(vals_list)
+
+    def _get_day_close_split(self):
+        """Return (barbershop amount, barber amount) of the order for the day closing.
+
+        Service lines give the barbershop the service's fixed share (capped at the
+        line subtotal) and the rest to the barber; product lines go entirely to the
+        barbershop. The tip is not part of the split.
+        """
+        self.ensure_one()
+        shop = barber = 0.0
+        for line in self.line_ids:
+            if line.line_type == 'service':
+                line_shop = min(line.service_id.shop_amount * line.quantity, line.price_subtotal)
+                shop += line_shop
+                barber += line.price_subtotal - line_shop
+            else:
+                shop += line.price_subtotal
+        return shop, barber
 
     def action_confirm_payment(self):
         for order in self:

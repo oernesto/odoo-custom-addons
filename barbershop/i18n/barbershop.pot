@@ -1135,6 +1135,7 @@ msgid "e.g. John Doe"
 msgstr ""
 
 #. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close_line__tip_amount
 #: model:ir.model.fields,field_description:barbershop.field_barbershop_order__tip_amount
 msgid "Tip"
 msgstr ""
@@ -1142,4 +1143,63 @@ msgstr ""
 #. module: barbershop
 #: model:ir.model.fields,help:barbershop.field_barbershop_order__tip_amount
 msgid "Tip left by the customer. It is informative only and is not included in the order total nor in any report totals."
+msgstr ""
+
+#. module: barbershop
+#: model:ir.model,name:barbershop.model_barbershop_day_close
+msgid "Barbershop Day Closing"
+msgstr ""
+
+#. module: barbershop
+#: model:ir.model,name:barbershop.model_barbershop_day_close_line
+msgid "Barbershop Day Closing Line"
+msgstr ""
+
+#. module: barbershop
+#: model:ir.actions.act_window,name:barbershop.action_barbershop_day_close
+#: model:ir.ui.menu,name:barbershop.menu_barbershop_day_close
+#: model_terms:ir.ui.view,arch_db:barbershop.view_barbershop_day_close_form
+msgid "Day Closing"
+msgstr ""
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close__date
+msgid "Date"
+msgstr ""
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close__line_ids
+msgid "Breakdown"
+msgstr ""
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close_line__barber_amount
+msgid "Barber Share"
+msgstr ""
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close__shop_total
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close_line__shop_amount
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_service__shop_amount
+msgid "Barbershop Share"
+msgstr ""
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close__barber_total
+msgid "Barbers Share"
+msgstr ""
+
+#. module: barbershop
+#: model:ir.model.fields,help:barbershop.field_barbershop_service__shop_amount
+msgid "Fixed amount of this service that goes to the barbershop on the day closing. The remainder goes to the barber."
+msgstr ""
+
+#. module: barbershop
+#: model_terms:ir.ui.view,arch_db:barbershop.view_barbershop_day_close_form
+msgid "Close"
+msgstr ""
+
+#. module: barbershop
+#: model:ir.model.fields,field_description:barbershop.field_barbershop_day_close__tip_total
+msgid "Tips"
 msgstr ""
