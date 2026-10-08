@@ -145,10 +145,17 @@ class BarbershopOrder(models.Model):
                 'shop_name': chair.shop_id.name if chair else (order.shop_id.name or ''),
                 'order_count': 0,
                 'amount_total': 0.0,
+                'shop_amount': 0.0,
+                'barber_amount': 0.0,
+                'tip_amount': 0.0,
                 'partner_ids': set(),
             })
+            shop_amount, barber_amount = order._get_day_close_split()
             entry['order_count'] += 1
             entry['amount_total'] += order.amount_total
+            entry['shop_amount'] += shop_amount
+            entry['barber_amount'] += barber_amount
+            entry['tip_amount'] += order.tip_amount
             entry['partner_ids'].add(order.partner_id.id)
 
         by_chair_list = [{
@@ -158,6 +165,9 @@ class BarbershopOrder(models.Model):
             'order_count': entry['order_count'],
             'customer_count': len(entry['partner_ids']),
             'amount_total': entry['amount_total'],
+            'shop_amount': entry['shop_amount'],
+            'barber_amount': entry['barber_amount'],
+            'tip_amount': entry['tip_amount'],
         } for entry in by_chair.values()]
         by_chair_list.sort(key=lambda r: r['amount_total'], reverse=True)
 
@@ -168,6 +178,9 @@ class BarbershopOrder(models.Model):
                 'order_count': len(orders),
                 'customer_count': len(orders.partner_id),
                 'amount_total': sum(orders.mapped('amount_total')),
+                'shop_amount': sum(r['shop_amount'] for r in by_chair_list),
+                'barber_amount': sum(r['barber_amount'] for r in by_chair_list),
+                'tip_amount': sum(orders.mapped('tip_amount')),
             },
             'by_chair': by_chair_list,
             'timeseries': timeseries,

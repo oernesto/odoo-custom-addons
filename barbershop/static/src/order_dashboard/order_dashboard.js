@@ -27,7 +27,14 @@ export class BarbershopOrderDashboard extends Component {
             dateTo: serializeDate(today()),
             activePreset: "month",
             loading: true,
-            kpi: { order_count: 0, customer_count: 0, amount_total: 0 },
+            kpi: {
+                order_count: 0,
+                customer_count: 0,
+                amount_total: 0,
+                shop_amount: 0,
+                barber_amount: 0,
+                tip_amount: 0,
+            },
             byChair: [],
             timeseries: [],
             granularity: "week",
@@ -107,6 +114,9 @@ export class BarbershopOrderDashboard extends Component {
         this.state.byChair = result.by_chair.map((row) => ({
             ...row,
             amountLabel: formatCurrency(row.amount_total, result.currency_id),
+            shopLabel: formatCurrency(row.shop_amount, result.currency_id),
+            barberLabel: formatCurrency(row.barber_amount, result.currency_id),
+            tipLabel: formatCurrency(row.tip_amount, result.currency_id),
             avgLabel: formatCurrency(
                 row.order_count ? row.amount_total / row.order_count : 0,
                 result.currency_id
@@ -123,6 +133,18 @@ export class BarbershopOrderDashboard extends Component {
 
     get amountTotalLabel() {
         return formatCurrency(this.state.kpi.amount_total, this.state.currencyId);
+    }
+
+    get shopAmountLabel() {
+        return formatCurrency(this.state.kpi.shop_amount, this.state.currencyId);
+    }
+
+    get barberAmountLabel() {
+        return formatCurrency(this.state.kpi.barber_amount, this.state.currencyId);
+    }
+
+    get tipAmountLabel() {
+        return formatCurrency(this.state.kpi.tip_amount, this.state.currencyId);
     }
 
     renderTimeChart() {
