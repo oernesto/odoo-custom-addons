@@ -51,7 +51,7 @@ export class BarbershopChairDashboard extends Component {
     }
 
     get stateLabels() {
-        return { draft: _t("Draft"), paid: _t("Paid"), cancelled: _t("Cancelled") };
+        return { draft: _t("Pending"), paid: _t("Paid"), cancelled: _t("Cancelled") };
     }
 
     get selectedChair() {

@@ -30,7 +30,7 @@
                             class="oe_highlight" invisible="state != 'draft'"/>
                     <button name="action_cancel" type="object" string="Cancel"
                             invisible="state == 'cancelled'"/>
-                    <button name="action_set_draft" type="object" string="Reset to Draft"
+                    <button name="action_set_draft" type="object" string="Reset to Pending"
                             invisible="state != 'cancelled'"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,paid"/>
                 </header>
@@ -95,7 +95,7 @@
                 <field name="shop_id"/>
                 <field name="barber_id"/>
                 <field name="chair_id"/>
-                <filter string="Draft" name="filter_draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Pending" name="filter_draft" domain="[('state', '=', 'draft')]"/>
                 <filter string="Paid" name="filter_paid" domain="[('state', '=', 'paid')]"/>
                 <filter string="Cancelled" name="filter_cancelled" domain="[('state', '=', 'cancelled')]"/>
                 <separator/>

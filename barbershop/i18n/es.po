@@ -519,8 +519,8 @@ msgstr "Nombre para mostrar"
 #: code:addons/barbershop/static/src/chair_dashboard/chair_dashboard.js:0
 #: model:ir.model.fields.selection,name:barbershop.selection__barbershop_order__state__draft
 #: model_terms:ir.ui.view,arch_db:barbershop.view_barbershop_order_search
-msgid "Draft"
-msgstr "Borrador"
+msgid "Pending"
+msgstr "Pendiente"
 
 #. module: barbershop
 #: model_terms:ir.ui.view,arch_db:barbershop.view_barbershop_service_tree
@@ -930,8 +930,8 @@ msgstr "Usuario relacionado"
 
 #. module: barbershop
 #: model_terms:ir.ui.view,arch_db:barbershop.view_barbershop_order_form
-msgid "Reset to Draft"
-msgstr "Restablecer a borrador"
+msgid "Reset to Pending"
+msgstr "Restablecer a pendiente"
 
 #. module: barbershop
 #: model:ir.model.fields,field_description:barbershop.field_barbershop_order__activity_user_id

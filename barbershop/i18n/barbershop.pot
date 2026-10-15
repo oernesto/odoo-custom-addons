@@ -511,7 +511,7 @@ msgstr ""
 #: code:addons/barbershop/static/src/chair_dashboard/chair_dashboard.js:0
 #: model:ir.model.fields.selection,name:barbershop.selection__barbershop_order__state__draft
 #: model_terms:ir.ui.view,arch_db:barbershop.view_barbershop_order_search
-msgid "Draft"
+msgid "Pending"
 msgstr ""
 
 #. module: barbershop
@@ -914,7 +914,7 @@ msgstr ""
 
 #. module: barbershop
 #: model_terms:ir.ui.view,arch_db:barbershop.view_barbershop_order_form
-msgid "Reset to Draft"
+msgid "Reset to Pending"
 msgstr ""
 
 #. module: barbershop

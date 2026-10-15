@@ -33,7 +33,7 @@ class BarbershopOrder(models.Model):
     date_order = fields.Datetime(
         string='Order Date', required=True, default=fields.Datetime.now)
     state = fields.Selection(
-        [('draft', 'Draft'),
+        [('draft', 'Pending'),
          ('paid', 'Paid'),
          ('cancelled', 'Cancelled')],
         string='Status', default='draft', copy=False, tracking=True, required=True)
