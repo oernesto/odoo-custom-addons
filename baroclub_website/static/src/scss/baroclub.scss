@@ -147,6 +147,18 @@ $bc-serif: 'Cinzel', serif;
         &__cta { font-size: 14px; font-weight: 700; color: $bc-gold-light; white-space: nowrap; }
     }
 
+    // Floating WhatsApp button
+    .bc-whatsapp {
+        position: fixed; right: 24px; bottom: 24px; z-index: 1030;
+        display: flex; align-items: center; justify-content: center;
+        width: 60px; height: 60px; border-radius: 50%;
+        background: #25D366; color: #fff; box-shadow: 0 4px 14px rgba(0, 0, 0, .45);
+        transition: transform .2s ease, box-shadow .2s ease;
+        &:hover { color: #fff; transform: scale(1.08); box-shadow: 0 6px 18px rgba(0, 0, 0, .55); }
+        &:focus-visible { outline: 3px solid $bc-gold-pale; outline-offset: 3px; }
+        @media (max-width: 575.98px) { right: 16px; bottom: 16px; width: 56px; height: 56px; }
+    }
+
     // Footer
     .bc-footer { padding: 56px 0 40px; }
     .bc-footer__inner { display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between; }
