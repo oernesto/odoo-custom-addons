@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="home" name="Baro Club Home">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'baroclub_home'"/>
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap"/>
+            <div id="wrap" class="oe_structure bc-page">
+
+                <!-- NAV -->
+                <header class="bc-nav">
+                    <nav class="bc-container bc-nav__inner" aria-label="Principal">
+                        <a href="#inicio" class="bc-brand">
+                            <img src="/baroclub_website/static/src/img/logo.jpg" alt="Monograma BC de Baro Club" class="bc-brand__logo"/>
+                            <span class="bc-brand__text">
+                                <span class="bc-brand__name">BARO CLUB</span>
+                                <span class="bc-brand__sub">BARBERÍA</span>
+                            </span>
+                        </a>
+                        <div class="bc-nav__links">
+                            <a href="#servicios">Servicios</a>
+                            <a href="#barbero">Tu barbero</a>
+                            <a href="#local">El local</a>
+                            <a href="#resenas">Reseñas</a>
+                            <a href="#visitanos">Visitanos</a>
+                            <a href="https://wa.me/59893540554" class="bc-btn bc-btn--accent bc-btn--sm">Reservar turno</a>
+                        </div>
+                    </nav>
+                </header>
+
+                <!-- HERO -->
+                <section id="inicio" class="bc-hero">
+                    <div class="bc-container bc-hero__inner">
+                        <div class="bc-hero__content">
+                            <div class="bc-eyebrow bc-eyebrow--line">
+                                <span class="bc-eyebrow__line"/>
+                                <span>CIUDAD VIEJA · MONTEVIDEO</span>
+                            </div>
+                            <h1 class="bc-hero__title">El oficio clásico del barbero, con estilo propio.</h1>
+                            <p class="bc-hero__lead">Cortes, barba y afeitado a navaja en un espacio pensado para que te relajes. Atención personalizada, sin apuro.</p>
+                            <div class="bc-actions">
+                                <a href="https://wa.me/59893540554" class="bc-btn bc-btn--accent bc-btn--lg">
+                                    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 21l2.2-5.3A8.4 8.4 0 1 1 21 11.5z"/></svg>
+                                    Reservar por WhatsApp
+                                </a>
+                                <a href="https://www.google.com/maps/search/?api=1&amp;query=Baro+Club+Barber%C3%ADa&amp;query_place_id=ChIJDdheZgCBn5URYLMBlLT_4KQ" class="bc-btn bc-btn--outline bc-btn--lg">Cómo llegar</a>
+                            </div>
+                            <div class="bc-rating">
+                                <span class="bc-rating__stars" aria-hidden="true">
+                                    <svg t-foreach="range(5)" t-as="i" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18.3 5.5 22l1.7-7.4-5.7-5 7.5-.7z"/></svg>
+                                </span>
+                                <span><strong>5,0</strong> · 78 reseñas en Google</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STRIP -->
+                <section class="bc-strip" aria-label="Datos rápidos">
+                    <div class="bc-container bc-strip__inner">
+                        <div class="bc-strip__item">
+                            <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                            <span><strong>San José 895</strong><small>11100 Montevideo</small></span>
+                        </div>
+                        <div class="bc-strip__item">
+                            <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                            <span><strong>Martes a sábado 10 – 20 h</strong><small>Lunes 12 – 20 h · Domingo cerrado</small></span>
+                        </div>
+                        <div class="bc-strip__item">
+                            <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+                            <span><strong>093 540 554</strong><small>Llamadas y WhatsApp</small></span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SERVICIOS -->
+                <section id="servicios" class="bc-section">
+                    <div class="bc-container">
+                        <div class="bc-section__head">
+                            <div class="bc-section__title">
+                                <p class="bc-eyebrow">SERVICIOS</p>
+                                <h2 class="bc-h2">Hecho a mano, a tu medida</h2>
+                            </div>
+                            <p class="bc-muted bc-section__intro">Cada servicio arranca con una charla: qué querés, cómo te peinás y qué te queda mejor.</p>
+                        </div>
+                        <div class="bc-services">
+                            <article class="bc-service">
+                                <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.1 15.9M14.5 14.5L20 20M8.1 8.1L12 12"/></svg>
+                                <h3>Corte clásico</h3>
+                                <p>Tijera y máquina, degradados y terminación prolija con cepillado y peinado.</p>
+                            </article>
+                            <article class="bc-service">
+                                <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L15 9M15 9l5-5M15 9l2 2M12 6l2 2"/><path d="M3 21l3-1-2-2z"/></svg>
+                                <h3>Afeitado a navaja</h3>
+                                <p>Toalla caliente, espuma y navaja. El ritual completo del barbero tradicional.</p>
+                            </article>
+                            <article class="bc-service">
+                                <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9c0 7 3 11 6 11s6-4 6-11"/><path d="M9 13c1 .7 2 1 3 1s2-.3 3-1"/><path d="M6 9V5M18 9V5"/></svg>
+                                <h3>Perfilado de barba</h3>
+                                <p>Diseño, rebaje y contorno a navaja, con aceites y bálsamo para terminar.</p>
+                            </article>
+                            <article class="bc-service bc-service--featured">
+                                <span class="bc-badge">EL MÁS PEDIDO</span>
+                                <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 7.1 18.2l.9-5.5-4-3.9 5.5-.8z"/></svg>
+                                <h3>Corte + barba</h3>
+                                <p>El combo completo: corte, perfilado de barba y toalla caliente.</p>
+                            </article>
+                            <article class="bc-service">
+                                <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/></svg>
+                                <h3>Lavado y masaje</h3>
+                                <p>Lavado en sillón reclinable con masaje capilar. Un momento para desconectar.</p>
+                            </article>
+                            <article class="bc-service">
+                                <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1s6 1 6 1 6 2 6-1-4-3-6 1"/></svg>
+                                <h3>Experiencia Baro</h3>
+                                <p>Corte, barba, lavado y una bebida de cortesía. Ideal para regalar.</p>
+                            </article>
+                        </div>
+                        <p class="bc-muted bc-services__note">Consultá precios y disponibilidad por <a href="https://wa.me/59893540554"><strong>WhatsApp</strong></a>.</p>
+                    </div>
+                </section>
+
+                <!-- TU BARBERO -->
+                <section id="barbero" class="bc-section bc-section--alt">
+                    <div class="bc-container bc-barber">
+                        <div class="bc-barber__media">
+                            <img src="/baroclub_website/static/src/img/greco.jpg" alt="Greco, barbero de Baro Club, sentado en el salón"/>
+                            <span class="bc-tag">GRECO</span>
+                        </div>
+                        <div class="bc-barber__body">
+                            <p class="bc-eyebrow">TU BARBERO</p>
+                            <h2 class="bc-h2">Greco, al frente del sillón</h2>
+                            <p class="bc-lead">En Baro Club te atiende siempre la misma persona. Greco se toma el tiempo de escucharte, entender tu estilo y dejarte el corte y la barba como los querés.</p>
+                            <p class="bc-muted">Como trabaja solo, cada turno es exclusivo: sin esperas ni apuros. Reservá con anticipación y asegurate tu lugar.</p>
+                            <figure class="bc-quote">
+                                <blockquote>“Greco es un genio.”</blockquote>
+                                <figcaption>Reseña en Google</figcaption>
+                            </figure>
+                            <div class="bc-actions">
+                                <a href="https://wa.me/59893540554" class="bc-btn bc-btn--accent bc-btn--lg">Reservar con Greco</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- EL LOCAL -->
+                <section id="local" class="bc-section bc-section--alt bc-section--bordered">
+                    <div class="bc-container bc-local">
+                        <div class="bc-section__head">
+                            <div class="bc-section__title">
+                                <p class="bc-eyebrow">EL LOCAL</p>
+                                <h2 class="bc-h2">Un club para el que se cuida</h2>
+                                <p class="bc-muted">Paredes bordó, luz cálida, madera y cuero. Un rincón con espíritu de club inglés en plena Ciudad Vieja, a pasos de la Plaza Independencia.</p>
+                            </div>
+                            <div class="bc-stats">
+                                <div><div class="bc-stats__value">5,0</div><div class="bc-stats__label">puntuación Google</div></div>
+                                <div><div class="bc-stats__value">78</div><div class="bc-stats__label">reseñas</div></div>
+                            </div>
+                        </div>
+                        <div class="bc-gallery">
+                            <img class="bc-gallery__tall" src="/baroclub_website/static/src/img/hero.jpg" alt="Interior de Baro Club con paredes rojas, lámparas colgantes y sillón de barbero"/>
+                            <div class="bc-gallery__stack">
+                                <img src="/baroclub_website/static/src/img/salon.jpg" alt="Vista del salón con espejos, estanterías y cuadro del logo"/>
+                                <img src="/baroclub_website/static/src/img/vidriera.jpg" alt="Vidriera de noche con el poste de barbero encendido"/>
+                            </div>
+                            <img class="bc-gallery__tall bc-gallery__facade" src="/baroclub_website/static/src/img/fachada.jpg" alt="Fachada de Baro Club sobre la calle San José"/>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RESEÑAS -->
+                <section id="resenas" class="bc-section">
+                    <div class="bc-container">
+                        <div class="bc-section__head bc-section__head--center">
+                            <div class="bc-section__title">
+                                <p class="bc-eyebrow">LO QUE DICEN</p>
+                                <h2 class="bc-h2">Clientes que vuelven</h2>
+                            </div>
+                        </div>
+                        <div class="bc-reviews">
+                            <figure class="bc-review">
+                                <span class="bc-review__mark" aria-hidden="true">“</span>
+                                <blockquote>El mejor servicio de barbería que tuve. Ojalá abrieran un lugar así en Madrid.</blockquote>
+                                <figcaption>Reseña en Google</figcaption>
+                            </figure>
+                            <figure class="bc-review">
+                                <span class="bc-review__mark" aria-hidden="true">“</span>
+                                <blockquote>Excelente atención y nuestro amigo barbero Greco es un genio. Muy recomendable.</blockquote>
+                                <figcaption>Reseña en Google</figcaption>
+                            </figure>
+                            <figure class="bc-review">
+                                <span class="bc-review__mark" aria-hidden="true">“</span>
+                                <blockquote>Súper amables y muy profesionales. Te vas renovado. Y el lavado… ese sillón es increíble.</blockquote>
+                                <figcaption>Reseña en Google</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VISITANOS -->
+                <section id="visitanos" class="bc-visit">
+                    <div class="bc-container bc-visit__inner">
+                        <div class="bc-visit__body">
+                            <div>
+                                <p class="bc-eyebrow bc-eyebrow--light">VISITANOS</p>
+                                <h2 class="bc-h2 bc-h2--light">Te esperamos en San José 895</h2>
+                            </div>
+                            <table class="bc-hours">
+                                <caption>HORARIOS</caption>
+                                <tbody>
+                                    <tr><th scope="row">Lunes</th><td>12:00 – 20:00</td></tr>
+                                    <tr><th scope="row">Martes a sábado</th><td>10:00 – 20:00</td></tr>
+                                    <tr><th scope="row">Domingo</th><td class="bc-hours__closed">Cerrado</td></tr>
+                                </tbody>
+                            </table>
+                            <div class="bc-actions">
+                                <a href="https://wa.me/59893540554" class="bc-btn bc-btn--dark bc-btn--lg">Escribinos por WhatsApp</a>
+                                <a href="tel:+59893540554" class="bc-btn bc-btn--outline-light bc-btn--lg">Llamar 093 540 554</a>
+                            </div>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=Baro+Club+Barber%C3%ADa&amp;query_place_id=ChIJDdheZgCBn5URYLMBlLT_4KQ" class="bc-map">
+                            <img src="/baroclub_website/static/src/img/fachada.jpg" alt="Entrada de Baro Club en San José 895"/>
+                            <span class="bc-map__card">
+                                <span><strong>San José 895, Montevideo</strong><small>Ciudad Vieja · 11100</small></span>
+                                <span class="bc-map__cta">Ver en Google Maps →</span>
+                            </span>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- FOOTER -->
+                <footer class="bc-footer">
+                    <div class="bc-container bc-footer__inner">
+                        <div class="bc-brand bc-brand--footer">
+                            <img src="/baroclub_website/static/src/img/logo.jpg" alt="" class="bc-brand__logo"/>
+                            <span class="bc-brand__text">
+                                <span class="bc-brand__name">BARO CLUB</span>
+                                <span class="bc-footer__addr">San José 895 · Montevideo, Uruguay</span>
+                            </span>
+                        </div>
+                        <div class="bc-footer__links">
+                            <a href="https://instagram.com/">Instagram [@USUARIO]</a>
+                            <a href="https://wa.me/59893540554">WhatsApp</a>
+                            <a href="tel:+59893540554">093 540 554</a>
+                        </div>
+                    </div>
+                    <div class="bc-container bc-footer__legal">© 2026 Baro Club Barbería</div>
+                </footer>
+
+            </div>
+        </t>
+    </template>
+
+    <!-- Replace the default homepage with the Baro Club one and hide the
+         standard Odoo header/footer: the page ships its own. -->
+    <record id="website.homepage_page" model="website.page">
+        <field name="view_id" ref="home"/>
+        <field name="header_visible" eval="False"/>
+        <field name="footer_visible" eval="False"/>
+    </record>
+
+</odoo>
