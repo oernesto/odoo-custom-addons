@@ -17,6 +17,7 @@ editable from the website editor.
 """,
     'depends': ['website'],
     'data': [
+        'data/website_data.xml',
         'views/homepage_templates.xml',
     ],
     'assets': {

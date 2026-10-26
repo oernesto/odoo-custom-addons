@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Browser tab icon: the Baro Club monogram. -->
+    <record id="website.default_website" model="website">
+        <field name="favicon" type="base64" file="baroclub_website/static/src/img/favicon.png"/>
+    </record>
+
+</odoo>
