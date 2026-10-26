@@ -164,5 +164,6 @@ $bc-serif: 'Cinzel', serif;
     .bc-footer__inner { display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between; }
     .bc-footer__addr { font-size: 13px; color: $bc-dim; font-weight: 400; letter-spacing: 0; }
     .bc-footer__links { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; a { text-decoration: none; padding: 10px 0; } }
+    .bc-footer__social { display: inline-flex; align-items: center; gap: 8px; }
     .bc-footer__legal { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba($bc-gold, .15); font-size: 13px; color: $bc-dim; }
 }
